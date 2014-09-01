@@ -1,0 +1,29 @@
+!bonj = b = a++; boni = b = lw(0xlw(a)); bonr b = a -c; bono = skip next instruction
+ vector0: .fill 0x00000000 !0
+ .fill 0x00000000 !1
+ .fill 0x00000004 !2
+ .fill 0x00000000
+ .fill 0x00000006 !4
+ .fill 0x00000000
+ .fill 0x00000000
+ .fill 0x00000000
+ .fill 0x00000000 !8
+ .fill 0x00000000
+ .fill 0x00000000
+ .fill 0x00000000
+ .fill 0x00000000
+ .fill 0x00000000
+ .fill 0x00000000
+ .fill 0x00000000 !15
+main:	addi $a1, $zero, 0		! put 0 in $a1
+	bonj $a1, $a1			! increment $a1 by 1 - bonj
+	boni $a2, $a1, 1		! retrieve value stored at **(2) - boni	 == **(2) == *(4) = 6
+	addi $a3, $zero, 10		! put value of 1 in $a3
+	addi $a4, $zero, 0		! initialize $a4 to 0
+	bono				! skip next instruction for first time in loop - bono
+Loop: 	addi $a3, $a3, -1		! decrement $a3 by 1
+	bonr $a4, $a4, $a3		! $a4 = $a4 - $a3
+	beq $a3, $zero, exit		! if $a3 = 0, exit
+	beq $zero, $zero, Loop		! else loop again
+exit:   halt				! end program
+

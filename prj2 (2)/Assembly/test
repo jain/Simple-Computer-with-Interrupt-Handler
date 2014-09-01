@@ -1,0 +1,5 @@
+ei
+addi $a0, $zero, 5
+sw $a0, 0($zero)
+di
+halt
